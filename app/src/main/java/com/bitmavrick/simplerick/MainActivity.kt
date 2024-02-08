@@ -6,22 +6,38 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.bitmavrick.network.TestFile
+import com.bitmavrick.network.Character
+import com.bitmavrick.network.KtorClient
 import com.bitmavrick.simplerick.ui.theme.SimpleRickTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val ktorClient = KtorClient()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            var character by remember { mutableStateOf<Character?>(null) }
+
+            LaunchedEffect(key1 = Unit, block = {
+                character = ktorClient.getCharacter(1)
+            })
+            
             SimpleRickTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // Code from here ...
-                    TestFile()
+                    Text(text = character?.name ?: "No character")
                 }
             }
         }
