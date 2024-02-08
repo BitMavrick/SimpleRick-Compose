@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import com.bitmavrick.network.Character
 import com.bitmavrick.network.KtorClient
 import com.bitmavrick.simplerick.ui.theme.SimpleRickTheme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
 
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
             var character by remember { mutableStateOf<Character?>(null) }
 
             LaunchedEffect(key1 = Unit, block = {
+                delay(3000)
                 character = ktorClient.getCharacter(1)
             })
             
