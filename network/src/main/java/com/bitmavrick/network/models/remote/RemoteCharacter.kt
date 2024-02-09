@@ -59,4 +59,3 @@ fun RemoteCharacter.toDomainCharacter(): Character {
         type = type
     )
 }
-
