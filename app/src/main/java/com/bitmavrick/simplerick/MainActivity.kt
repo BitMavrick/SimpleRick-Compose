@@ -13,8 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.bitmavrick.network.Character
 import com.bitmavrick.network.KtorClient
+import com.bitmavrick.network.models.domain.Character
 import com.bitmavrick.simplerick.ui.theme.SimpleRickTheme
 import kotlinx.coroutines.delay
 
@@ -30,16 +30,15 @@ class MainActivity : ComponentActivity() {
 
             LaunchedEffect(key1 = Unit, block = {
                 delay(3000)
-                character = ktorClient.getCharacter(1)
+                character = ktorClient.getCharacter(55)
             })
             
             SimpleRickTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Text(text = character?.name ?: "No character")
+                    Text(text = character?.name ?: "Character Loading ...")
                 }
             }
         }

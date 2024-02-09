@@ -1,5 +1,6 @@
 package com.bitmavrick.network
 
+import com.bitmavrick.network.models.domain.Character
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.OkHttp
@@ -10,7 +11,6 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 class KtorClient {
@@ -33,14 +33,3 @@ class KtorClient {
     }
 }
 
-@Serializable
-data class Character(
-    val id: Int,
-    val name: String,
-    val origin: Origin
-){
-    @Serializable
-    data class Origin(
-        val name: String,
-    )
-}
