@@ -44,3 +44,5 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+// TODO : Next Jetpack compose + Coil
