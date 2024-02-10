@@ -45,4 +45,4 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// TODO : Next Jetpack compose + Coil
+// TODO : Next Jetpack compose + Coil (Saving)
