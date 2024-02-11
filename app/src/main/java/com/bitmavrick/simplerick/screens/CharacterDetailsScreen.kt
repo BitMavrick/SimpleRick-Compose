@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.bitmavrick.network.KtorClient
 import com.bitmavrick.network.models.domain.Character
+import com.bitmavrick.simplerick.components.common.DataPoint
 import com.bitmavrick.simplerick.components.common.LoadingState
 import kotlinx.coroutines.delay
 
@@ -23,10 +24,12 @@ fun CharacterDetailsScreen(
 ) {
     var character by remember { mutableStateOf<Character?>(null) }
 
-    LaunchedEffect(key1 = Unit, block = {
+    val characterDataPoint: List<DataPoint>
+
+    LaunchedEffect(key1 = Unit) {
         delay(500)
         character = ktorClient.getCharacter(characterId)
-    })
+    }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -37,7 +40,10 @@ fun CharacterDetailsScreen(
             return@LazyColumn
         }
 
-        // From here ...
+        // Name plate
+        item {
+
+        }
 
     }
 }
