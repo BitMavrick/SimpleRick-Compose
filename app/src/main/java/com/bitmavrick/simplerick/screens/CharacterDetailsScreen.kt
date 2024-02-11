@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,7 +25,22 @@ fun CharacterDetailsScreen(
 ) {
     var character by remember { mutableStateOf<Character?>(null) }
 
-    val characterDataPoint: List<DataPoint>
+    val characterDataPoint: List<DataPoint> by remember {
+        derivedStateOf {
+            buildList {
+                character?.let { character ->
+                    add(DataPoint("Last known location", character.location.name))
+                    add(DataPoint("Species", character.species))
+                    add(DataPoint("Gender", character.gender.genderString))
+                    character.type.takeIf { it.isNotEmpty() } ?.let { type ->
+                        add(DataPoint("Type", type))
+                    }
+                    add(DataPoint("Origin", character.origin.name))
+                    add(DataPoint("Episode count", character.episodeIds.size.toString()))
+                }
+            }
+        }
+    }
 
     LaunchedEffect(key1 = Unit) {
         delay(500)
