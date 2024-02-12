@@ -2,9 +2,13 @@ package com.bitmavrick.simplerick.screens
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -13,11 +17,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.bitmavrick.network.KtorClient
 import com.bitmavrick.network.models.domain.Character
 import com.bitmavrick.simplerick.components.character.CharacterDetailsNamePlateComponent
 import com.bitmavrick.simplerick.components.common.DataPoint
+import com.bitmavrick.simplerick.components.common.DataPointComponent
 import com.bitmavrick.simplerick.components.common.LoadingState
 import kotlinx.coroutines.delay
 
@@ -28,7 +36,7 @@ fun CharacterDetailsScreen(
 ) {
     var character by remember { mutableStateOf<Character?>(null) }
 
-    val characterDataPoint: List<DataPoint> by remember {
+    val characterDataPoints by remember {
         derivedStateOf {
             buildList {
                 character?.let { character ->
@@ -71,7 +79,25 @@ fun CharacterDetailsScreen(
 
         item { Spacer(modifier = Modifier.height(8.dp)) }
 
-        // Image from here ...
-
+        // Image
+        item {
+            SubcomposeAsyncImage(
+                model = character!!.imageUrl,
+                contentDescription = "Character Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(15.dp)),
+                loading = {
+                    LoadingState()
+                }
+            )
+        }
+        
+        // Data points
+        items(characterDataPoints){
+            Spacer(modifier = Modifier.height(32.dp))
+            DataPointComponent(dataPoint = it)
+        }
     }
 }
