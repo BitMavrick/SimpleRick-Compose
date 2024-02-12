@@ -15,6 +15,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.bitmavrick.network.KtorClient
 import com.bitmavrick.network.models.domain.Character
+import com.bitmavrick.simplerick.screens.CharacterDetailsScreen
+import com.bitmavrick.simplerick.ui.theme.RickPrimary
 import com.bitmavrick.simplerick.ui.theme.SimpleRickTheme
 import kotlinx.coroutines.delay
 
@@ -25,24 +27,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-            var character by remember { mutableStateOf<Character?>(null) }
-
-            LaunchedEffect(key1 = Unit, block = {
-                delay(3000)
-                character = ktorClient.getCharacter(55)
-            })
-            
             SimpleRickTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = RickPrimary
                 ) {
-                    Text(text = character?.name ?: "Character Loading ...")
+                    CharacterDetailsScreen(
+                        ktorClient = ktorClient,
+                        characterId = 55
+                    )
                 }
             }
         }
     }
 }
-
-// TODO : Next Jetpack compose + Coil (from: 7:00)
