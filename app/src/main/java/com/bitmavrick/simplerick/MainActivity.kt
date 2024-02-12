@@ -40,4 +40,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    // TODO: On next --> How to handle API errors
 }
