@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+    // TODO: Next-> Sticky Headers in Jetpack compose
 }
 
 @Composable
