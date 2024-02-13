@@ -25,12 +25,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     CharacterDetailsScreen(
                         ktorClient = ktorClient,
-                        characterId = 55
+                        characterId = 173
                     )
                 }
             }
         }
     }
-
-    // TODO: On next --> How to handle API errors
 }

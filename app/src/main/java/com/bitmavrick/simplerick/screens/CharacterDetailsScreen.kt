@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
+import com.bitmavrick.network.ApiOperation
 import com.bitmavrick.network.KtorClient
 import com.bitmavrick.network.models.domain.Character
 import com.bitmavrick.simplerick.components.character.CharacterDetailsNamePlateComponent
@@ -61,7 +62,14 @@ fun CharacterDetailsScreen(
 
     LaunchedEffect(key1 = Unit) {
         delay(500)
-        character = ktorClient.getCharacter(characterId)
+        ktorClient
+            .getCharacter(characterId)
+            .onSuccess {
+                character = it
+            }
+            .onFailure {exception ->
+                // TODO: Handle exception here
+            }
     }
 
     LazyColumn(
