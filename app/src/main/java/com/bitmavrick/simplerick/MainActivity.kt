@@ -11,11 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.bitmavrick.network.KtorClient
 import com.bitmavrick.simplerick.screens.CharacterDetailsScreen
+import com.bitmavrick.simplerick.ui.theme.RickAction
 import com.bitmavrick.simplerick.ui.theme.RickPrimary
 import com.bitmavrick.simplerick.ui.theme.SimpleRickTheme
 
@@ -44,7 +47,10 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
-                        composable("character_episodes/{characterId}") { backStackEntry->
+                        composable(
+                            route = "character_episodes/{characterId}",
+                            arguments = listOf(navArgument("characterId"){type = NavType.IntType})
+                        ) { backStackEntry->
                             val characterId: Int = backStackEntry.arguments?.getInt("characterId") ?: -1
                             CharacterEpisodeScreen(characterId = characterId)
                         }
@@ -63,7 +69,8 @@ fun CharacterEpisodeScreen(characterId: Int) {
     ){
         Text(
             text = "Character episode screen: $characterId",
-            fontSize = 28.sp
+            fontSize = 28.sp,
+            color = RickAction
         )
     }
 }
