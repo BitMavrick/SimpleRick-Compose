@@ -57,6 +57,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    // TODO: Next-> Sticky Headers in Jetpack compose
+    // TODO: Next-> Add horizontal scroll
 }
 
