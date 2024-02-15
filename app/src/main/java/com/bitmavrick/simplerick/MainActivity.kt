@@ -57,6 +57,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    // TODO: Next-> Add horizontal scroll
+    // TODO: Next-> Adding hilt in multi module app
 }
 
