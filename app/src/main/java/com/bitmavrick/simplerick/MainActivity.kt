@@ -61,6 +61,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    // TODO: Next-> Adding hilt in multi module app
+    // TODO: Next-> MVVM + Hilt + Compose Navigation
 }
 
