@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import coil.compose.SubcomposeAsyncImage
 import com.bitmavrick.network.ApiOperation
 import com.bitmavrick.network.KtorClient
@@ -35,6 +36,33 @@ import com.bitmavrick.simplerick.components.common.DataPointComponent
 import com.bitmavrick.simplerick.components.common.LoadingState
 import com.bitmavrick.simplerick.ui.theme.RickAction
 import kotlinx.coroutines.delay
+import javax.inject.Inject
+
+
+class CharacterRepository @Inject constructor(private val ktorClient: KtorClient) {
+    suspend fun fetchCharacter(characterId: Int) : ApiOperation<Character>{
+        return ktorClient.getCharacter(characterId)
+    }
+}
+
+class CharacterViewModel @Inject constructor(
+
+
+) : ViewModel() {
+
+
+
+}
+
+sealed interface CharacterDetailsViewState {
+    object Loading: CharacterDetailsViewState
+    data class Error(val message: String) : CharacterDetailsViewState
+    data class Success(
+        val character: Character,
+        val characterDataPoint: List<DataPoint>
+    ): CharacterDetailsViewState
+}
+
 
 @Composable
 fun CharacterDetailsScreen(
